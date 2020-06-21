@@ -2,31 +2,31 @@ import Link from 'next/link'
 
 import queryGraphql from '../shared/query-graphql'
 
-export default function UserListing({ users }) {
+export default function UserListing({ character }) {
   return (
     <div>
       <h1>User Listing</h1>
-      <ul>
-        {users.map((user) => (
-          <li key={user.username}>
-            <Link href="/[username]" as={`/${user.username}`}>
-              <a>{user.name}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
+        {character}
+      {/*<ul>*/}
+      {/*  {users.map((user) => (*/}
+      {/*    <li key={user.username}>*/}
+      {/*      <Link href="/[username]" as={`/${user.username}`}>*/}
+      {/*        <a>{user.name}</a>*/}
+      {/*      </Link>*/}
+      {/*    </li>*/}
+      {/*  ))}*/}
+      {/*</ul>*/}
     </div>
   )
 }
 
 export async function getStaticProps() {
-  const { users } = await queryGraphql(`
+  const { character } = await queryGraphql(`
     query {
-      users {
+      character (id:"4") {
         name
-        username
       }
     }
   `)
-  return { props: { users } }
+  return { props: { character } }
 }
