@@ -6,7 +6,7 @@ export default function UserListing({ character }) {
   return (
     <div>
       <h1>User Listing</h1>
-        {character}
+        {character.name}
       {/*<ul>*/}
       {/*  {users.map((user) => (*/}
       {/*    <li key={user.username}>*/}
