@@ -12,7 +12,8 @@ export default function UserListing({ locations }) {
       {/*<ul>*/}
       {/*  {users.map((user) => (*/}
       {/*    <li key={user.username}>*/}
-      {/*      <Link href="/[username]" as={`/${user.username}`}>*/}
+      {/*      <Link href="/[
+      ]" as={`/${user.username}`}>*/}
       {/*        <a>{user.name}</a>*/}
       {/*      </Link>*/}
       {/*    </li>*/}
@@ -22,9 +23,9 @@ export default function UserListing({ locations }) {
           {/*{locations.results}*/}
           {locations.results.map((location) => (
             <li key={location.name}>
-              {/*<Link href="/[location]" as={`/${location.name}`}>*/}
+              <Link href="/locations/[id]" as={`/locations/${location.id.toString()}`}>
                 <a>{location.name}</a>
-              {/*</Link>*/}
+              </Link>
             </li>
           ))}
         </ul>
@@ -45,6 +46,7 @@ export async function getStaticProps() {
     query {
       locations {
         results {
+            id
             name
             type
             residents{
