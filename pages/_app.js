@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../src/styles/reboot.css'
+import '../src/styles/main.css'
 // import App from 'next/app'
 
 function MyApp({ Component, pageProps }) {

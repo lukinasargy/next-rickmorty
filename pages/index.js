@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React, {Component} from 'react';
 import queryGraphql from '../shared/query-graphql'
 import Layout from '../components/layout'
+import classes from './index.module.css';
 export default class LocationListing extends Component {
     state = {
         locations: this.props.locations.results.slice(0,20)
@@ -23,7 +24,24 @@ export default class LocationListing extends Component {
                     {this.state.locations.map((location) => (
                         <li key={location.name} >
                             <Link href="/locations/[id]" as={`/locations/${location.id.toString()}`}>
-                                <a>{location.name}</a>
+
+                                <a>
+                                    {/*<div className={classes.location__type} locationtype={location.type}></div>*/}
+                                    <img src={`/images/${location.type.toLowerCase() + '.png'}`} className={classes.location__type} alt={location.type}/>
+                                    <h2>{location.name}</h2>
+                                    <h3>{location.type}</h3>
+                                    <ul>
+                                        { (location['residents'][0]) ?
+                                            (<li><img src={location['residents'][0]['image']} alt=""/></li>)
+                                            : null}
+                                        { (location['residents'][1]) ?
+                                            (<li><img src={location['residents'][1]['image']} alt=""/></li>)
+                                        : null}
+                                        { (location['residents'][2]) ?
+                                            (<li><img src={location['residents'][2]['image']} alt=""/></li>)
+                                        : null}
+                                    </ul>
+                                </a>
                             </Link>
                         </li>
                     ))}
@@ -34,26 +52,9 @@ export default class LocationListing extends Component {
 }
 
 export async function getServerSideProps() {
-    // let locations = {results: []};
-    // for (let i = 1;i < 6; i++) {
-    //     let queryString = `query {
-    //   locations(page: $page) {
-    //     results {
-    //         id
-    //         name
-    //         type
-    //         residents{
-    //             name
-    //             image
-    //          }
-    //      }
-    //   }
-    // }`.replace('$page', '1');
-    //     let {locationsAdded = null} = await queryGraphql(queryString);
-    //     console.log(locationsAdded);
-    //     locations.results = [...locations.results,...locationsAdded.results]
-    // }
-    const {locations} = await queryGraphql(`query {
+    let locations = {results: []};
+    for (let i = 1;i < 6; i++) {
+        let queryString = `query {
       locations(page: $page) {
         results {
             id
@@ -65,6 +66,24 @@ export async function getServerSideProps() {
              }
          }
       }
-    }`.replace('$page', '1'));
+    }`.replace('$page', i.toString());
+        let locationsAdded  = await queryGraphql(queryString);
+        let added = {locationsAdded};
+        locations.results = [...locations.results,...added.locationsAdded.locations.results]
+    }
+    // const {locations} = await queryGraphql(`query {
+    //   locations(page: $page) {
+    //     results {
+    //         id
+    //         name
+    //         type
+    //         residents{
+    //             name
+    //             image
+    //          }
+    //      }
+    //   }
+    // }`.replace('$page', '1'));
+    // console.log(locations);
     return {props: {locations}}
 }
