@@ -1,0 +1,11 @@
+.header {
+    background-color: #000000;
+    /*background-image: url(/images/header.png);*/
+    background-repeat: no-repeat;
+}
+.header__img {
+    display:block;
+    margin: 0 auto;
+    display: flex;
+    max-width: 100%;
+}

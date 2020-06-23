@@ -1,38 +1,41 @@
-import queryGraphql from '../../shared/query-graphql'
-
-export default function locationProfile({ location, locationid }) {
+import queryGraphql from '../../shared/query-graphql';
+import Layout from '../../components/layout';
+export default function locationProfile({ location }) {
 
     if (!location) {
-        return <h1>location Not Found {locationid}</h1>
+        return (
+            <Layout>
+            <h1>location Not Found </h1>
+            </Layout>
+        )
     }
     return (
-        <h1>
+        <Layout>
+            <h1>
             {location.name} id is {location.id}
         </h1>
+        </Layout>
     )
 }
-
-
-
-export async function getStaticPaths() {
-    const { locations } = await queryGraphql(`
-    query {
-      locations {
-        results {
-            name
-            id
-        }
-      }
-    }
-  `)
-    return {
-        paths: locations.results.map(( location ) => ({
-            params: { id : location.id.toString() },
-        })),
-        fallback: true,
-    }
-}
-export async function getStaticProps(context) {
+// export async function getServerSidePaths() {
+//     const { locations } = await queryGraphql(`
+//     query {
+//       locations {
+//         results {
+//             name
+//             id
+//         }
+//       }
+//     }
+//   `)
+//     return {
+//         paths: locations.results.map(( location ) => ({
+//             params: { id : location.id.toString() },
+//         })),
+//         fallback: true,
+//     }
+// }
+export async function getServerSideProps(context) {
     const { params } = context
     const   locationid   = params.id;
     // const  locationid  = 1;

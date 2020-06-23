@@ -1,21 +1,23 @@
 import Link from 'next/link'
 import React, {Component} from 'react';
 import queryGraphql from '../shared/query-graphql'
-
+import Layout from '../components/layout'
 export default class LocationListing extends Component {
     state = {
-        locations: this.props.locations.results
+        locations: this.props.locations.results.slice(0,20)
     };
     handleScroll = () =>  {
-        let newLocations = this.state.locations;
-        this.setState(({ locations }) => ({
-            locations: [ ...locations, ...newLocations ],
-        }));
+        let newLength = this.state.locations.length;
+        if (newLength < this.props.locations.results.length) {
+            newLength += 5;
+        }
+        const locationsNew = this.props.locations.results.slice(this.state.locations.length, newLength);
+        let locationsUpdated = [...this.state.locations, ...locationsNew]
+        this.setState({ locations:locationsUpdated });
     };
     render() {
-        // this.addEventListener('scroll', this.handleScroll);
         return (
-            <div onScroll={this.handleScroll}>
+            <Layout>
                 <h1 onClick={this.handleScroll}>Location Listing</h1>
                 <ul>
                     {this.state.locations.map((location) => (
@@ -26,12 +28,12 @@ export default class LocationListing extends Component {
                         </li>
                     ))}
                 </ul>
-            </div>
+            </Layout>
         )
     }
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const {locations} = await queryGraphql(`
     query {
       locations {
