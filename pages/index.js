@@ -34,9 +34,27 @@ export default class LocationListing extends Component {
 }
 
 export async function getServerSideProps() {
-    const {locations} = await queryGraphql(`
-    query {
-      locations {
+    // let locations = {results: []};
+    // for (let i = 1;i < 6; i++) {
+    //     let queryString = `query {
+    //   locations(page: $page) {
+    //     results {
+    //         id
+    //         name
+    //         type
+    //         residents{
+    //             name
+    //             image
+    //          }
+    //      }
+    //   }
+    // }`.replace('$page', '1');
+    //     let {locationsAdded = null} = await queryGraphql(queryString);
+    //     console.log(locationsAdded);
+    //     locations.results = [...locations.results,...locationsAdded.results]
+    // }
+    const {locations} = await queryGraphql(`query {
+      locations(page: $page) {
         results {
             id
             name
@@ -47,7 +65,6 @@ export async function getServerSideProps() {
              }
          }
       }
-    }
-  `)
+    }`.replace('$page', '1'));
     return {props: {locations}}
 }
