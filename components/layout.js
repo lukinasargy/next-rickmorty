@@ -22,8 +22,9 @@ export default function Layout({
                     </Link>
                 </nav>
             </header>
-
-            {children}
+            <div className={classes.container}>
+              {children}
+            </div>
 
             <footer>{'I`m here to stay'}</footer>
         </div>
