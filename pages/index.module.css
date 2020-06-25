@@ -1,3 +1,4 @@
+
 .location__list {
     display: grid;
     grid-row-gap: 8px;
@@ -5,10 +6,6 @@
 .location__item {
     max-width: 100%
 }
-/*.location__typeimage {*/
-/*    */
-
-/*}*/
 .location__link {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -16,10 +13,11 @@
     gap: 0px 16px;
     /*height: 145px;*/
     grid-template-areas: "location__typeimage location__name" "location__typeimage location__type" "location__typeimage location__residents";
+    background-color: #312A2A;
 }
 .location__name {
     grid-area: location__name;
-    font-size: 24px;
+    font-size: 20px;
     margin-top: 16px;
     margin-bottom: 7px;
 }
@@ -48,6 +46,9 @@
     width: 100%;
 }
 @media (min-width: 414px) {
+    .location__name {
+        font-size: 24px;
+    }
     .location__residents {
         grid-column-gap:20px;
     }

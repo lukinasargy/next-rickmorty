@@ -21,7 +21,7 @@ export default class LocationListing extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener('scroll',this.handleScroll,false)
+    window.addEventListener('scroll', this.handleScroll, false)
   }
 
   componentWillUnmount() {
@@ -31,39 +31,41 @@ export default class LocationListing extends Component {
   render() {
     return (
       <Layout>
-        {/*<h1 onClick={this.handleScroll}>Location Listing</h1>*/}
-        <ul className={classes.location__list}>
-          {this.state.locations.map((location) => (
-            <li key={location.name} className={classes.location__item}>
-              <Link href="/locations/[id]" as={`/locations/${location.id.toString()}`}>
-                <a className={classes.location__link}>
-                  <div className="location__typeimage" locationtype={location.type}></div>
-                  {/*<img src={'/images/' + location.type.toLowerCase() + '.png'} className={classes.location__typeimage}*/}
-                  {/*     alt={location.type}/>*/}
-                  <h2 className={classes.location__name}>{location.name}</h2>
-                  <h3 className={classes.location__type}>{location.type}</h3>
-                  <ul className={classes.location__residents}>
-                    {(location['residents'][0]) ?
-                      (<li className={classes.location__resident}><img src={location['residents'][0]['image']}
-                                                                       className={classes.location__residentimage}
-                                                                       alt=""/></li>)
-                      : null}
-                    {(location['residents'][1]) ?
-                      (<li className={classes.location__resident}><img src={location['residents'][1]['image']}
-                                                                       className={classes.location__residentimage}
-                                                                       alt=""/></li>)
-                      : null}
-                    {(location['residents'][2]) ?
-                      (<li className={classes.location__resident}><img src={location['residents'][2]['image']}
-                                                                       className={classes.location__residentimage}
-                                                                       alt=""/></li>)
-                      : null}
-                  </ul>
-                </a>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="container">
+          {/*<h1 onClick={this.handleScroll}>Location Listing</h1>*/}
+          <ul className={classes.location__list}>
+            {this.state.locations.map((location) => (
+              <li key={location.name} className={classes.location__item}>
+                <Link href="/locations/[id]" as={`/locations/${location.id.toString()}`}>
+                  <a className={classes.location__link}>
+                    <div className="location__typeimage" locationtype={location.type}></div>
+                    {/*<img src={'/images/' + location.type.toLowerCase() + '.png'} className={classes.location__typeimage}*/}
+                    {/*     alt={location.type}/>*/}
+                    <h2 className={classes.location__name}>{location.name}</h2>
+                    <h3 className={classes.location__type}>{location.type}</h3>
+                    <ul className={classes.location__residents}>
+                      {(location['residents'][0]) ?
+                        (<li className={classes.location__resident}><img src={location['residents'][0]['image']}
+                                                                         className={classes.location__residentimage}
+                                                                         alt=""/></li>)
+                        : null}
+                      {(location['residents'][1]) ?
+                        (<li className={classes.location__resident}><img src={location['residents'][1]['image']}
+                                                                         className={classes.location__residentimage}
+                                                                         alt=""/></li>)
+                        : null}
+                      {(location['residents'][2]) ?
+                        (<li className={classes.location__resident}><img src={location['residents'][2]['image']}
+                                                                         className={classes.location__residentimage}
+                                                                         alt=""/></li>)
+                        : null}
+                    </ul>
+                  </a>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Layout>
     )
   }

@@ -22,7 +22,7 @@ export default function Layout({
                     </Link>
                 </nav>
             </header>
-            <div className={classes.container}>
+            <div >
               {children}
             </div>
 
