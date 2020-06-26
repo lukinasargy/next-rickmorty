@@ -22,7 +22,6 @@ export default class locationProfile extends Component {
   };
 
   componentDidMount() {
-    alert(this.state.characters.length)
     window.addEventListener('scroll', this.handleScroll, false)
   }
 
@@ -59,11 +58,12 @@ export default class locationProfile extends Component {
                 <li key={character.id} className={classes.character__item}>
                   <Link href="/characters/[id]" as={`/characters/${character.id.toString()}`}>
                     <a className={classes.character__link}>
-                      <img src={character.image} className="character__image"/>
-                      <h3 className={classes.character__name}>{character.name}</h3>
-                      <h4 className={classes.character__species}>{character.species}</h4>
-                      <h4 className={classes.character__location}>{character.location.name}</h4>
-
+                      <img src={character.image} className={classes.character__image}/>
+                      <div className={classes.character__info}>
+                        <h3 className={classes.character__name}>{character.name}</h3>
+                        <h4 className={classes.character__location}>{character.location.name}</h4>
+                        <h4 className={classes.character__species}>{character.species}</h4>
+                      </div>
                     </a>
                   </Link>
                 </li>

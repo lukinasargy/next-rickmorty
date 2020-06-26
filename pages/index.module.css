@@ -20,6 +20,7 @@
     font-size: 20px;
     margin-top: 16px;
     margin-bottom: 7px;
+    font-weight: bold;
 }
 .location__type {
     grid-area: location__type;
