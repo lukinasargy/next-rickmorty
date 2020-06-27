@@ -20,11 +20,45 @@ h1,h2,h3,h4,h5,h6 {
 }
 .container {
     padding: 0 8px;
-    width: 398px;
+    width: 414px;
     max-width: 100%;
-    margin: 10px auto 36px
+    margin: 10px auto 36px;
 }
-.location__typeimage {
+.big {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+.small {
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+.front {
+    position: relative;
+    margin: 0 auto;
+    max-width: 100%;
+}
+.front__backlink {
+    display: inline-block;
+    position: absolute;
+    left: 13px;
+    top: 9px;
+}
+.front__image {
+    display: block;
+    width: 414px;
+    height: 100vw;
+    max-width: 100%;
+    margin: 0 auto;
+    background-image: url(/images/morty.png);
+    background-size: 100%;
+}
+/*.name {*/
+/*    text-overflow: ellipsis;*/
+/*    width: 100px;*/
+/*    overflow: auto;*/
+/*}*/
+.location__image {
     width: 145px;
     height: 145px;
     grid-area: location__typeimage;
@@ -52,4 +86,26 @@ h1,h2,h3,h4,h5,h6 {
 }
 [locationtype = "unknown"] {
     background-image: url(/images/unknown.png);
+}
+
+@media (min-width: 414px) {
+    .big {
+        font-size: 24px;
+    }
+    .front__image {
+        height: 414px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 992px;
+        padding: 0 16px;
+    }
+    .front {
+        width: 992px;
+    }
+    .location__image {
+        width: 200px;
+        height: 200px;
+    }
 }

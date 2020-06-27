@@ -4,13 +4,14 @@ import Layout from '../../components/layout';
 import classes from './[id].module.css';
 import React, {Component} from "react";
 
-export default class locationProfile extends Component {
+export default class LocationProfile extends Component {
   state = {
     location: this.props.location,
-    characters: this.props.location.residents.slice(0, 20)
+    characters: this.props.location ? this.props.location.residents.slice(0, 20) : null
   };
   handleScroll = () => {
-    if ((window.pageYOffset + window.innerHeight) === window.document.body.offsetHeight) {
+    // console.log(window.pageYOffset + window.innerHeight + ' ' + window.document.body.offsetHeight);
+    if ((window.pageYOffset + window.innerHeight) >= window.document.body.offsetHeight) {
       let newLength = this.state.characters.length;
       if (newLength < this.props.location.residents.length) {
         newLength += 10;
@@ -28,21 +29,25 @@ export default class locationProfile extends Component {
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll, false);
   }
-  render () {
+
+  render() {
     if (!this.state.location) {
       return (
         <Layout>
-          <h1>location Not Found </h1>
+          <div className="container">
+            <h1 style={{textAlign: 'center'}}>Location Not Found </h1>
+          </div>
         </Layout>
       )
     }
-    const imageClasses = `location__typeimage ${classes.location__typeimage}`;
     return (
       <Layout>
-        <div className={imageClasses} locationtype={this.state.location.type}>
+        <div className="front">
+          <div className={`front__image ${classes.location__typeimage}`} locationtype={this.state.location.type}>
+          </div>
           <Link href="../">
-            <a className={classes.backlink}>
-              <img src="/images/back.svg" alt="back link" className={classes.backlink__image}/>
+            <a className="front__backlink">
+              <img src="/images/back.svg" alt="back link"/>
             </a>
           </Link>
         </div>
@@ -51,25 +56,28 @@ export default class locationProfile extends Component {
             <h1 className={classes.info__name}>{this.state.location.name}</h1>
             <h3 className={classes.info__type}>{this.state.location.type}</h3>
           </div>
-          <div className={classes.residents}>
-            <h2 className={classes.residents__title}>Residents</h2>
-            <ul className={classes.residents__list}>
-              {this.state.characters.map((character) => (
-                <li key={character.id} className={classes.character__item}>
-                  <Link href="/characters/[id]" as={`/characters/${character.id.toString()}`}>
-                    <a className={classes.character__link}>
-                      <img src={character.image} className={classes.character__image}/>
-                      <div className={classes.character__info}>
-                        <h3 className={classes.character__name}>{character.name}</h3>
-                        <h4 className={classes.character__location}>{character.location.name}</h4>
-                        <h4 className={classes.character__species}>{character.species}</h4>
-                      </div>
-                    </a>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {(this.props.location.residents[0]['name']) ? (
+            <div className={classes.residents}>
+              <h2 className={classes.residents__title}>Residents</h2>
+              <ul className={classes.residents__list}>
+                {this.state.characters.map((character) => (
+                  <li key={character.id} className={classes.character__item}>
+                    <Link href="/characters/[id]" as={`/characters/${character.id.toString()}`}>
+                      <a className={classes.character__link}>
+                        <img src={character.image} className={classes.character__image}/>
+                        <div className={classes.character__info}>
+                          <h3 className={`big  ${classes.character__name}`} title={character.name}>{character.name}</h3>
+                          <h4 className="small">{character.location.name}</h4>
+                          <h4 className="small">{character.species}</h4>
+                        </div>
+                      </a>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>) : (<div>No residents found</div>)
+
+          }
         </div>
       </Layout>
     )

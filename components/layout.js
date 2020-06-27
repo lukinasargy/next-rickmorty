@@ -26,7 +26,7 @@ export default function Layout({
               {children}
             </div>
 
-            <footer>{'I`m here to stay'}</footer>
+            {/*<footer>{'I`m here to stay'}</footer>*/}
         </div>
     )
 }

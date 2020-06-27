@@ -9,7 +9,8 @@ export default class LocationListing extends Component {
     locations: this.props.locations.results.slice(0, 20)
   };
   handleScroll = () => {
-    if ((window.pageYOffset + window.innerHeight) === window.document.body.offsetHeight) {
+    // console.log(window.pageYOffset + window.innerHeight + ' ' + window.document.body.offsetHeight);
+    if ((window.pageYOffset + window.innerHeight) >= window.document.body.offsetHeight) {
       let newLength = this.state.locations.length;
       if (newLength < this.props.locations.results.length) {
         newLength += 10;
@@ -38,10 +39,8 @@ export default class LocationListing extends Component {
               <li key={location.name} className={classes.location__item}>
                 <Link href="/locations/[id]" as={`/locations/${location.id.toString()}`}>
                   <a className={classes.location__link}>
-                    <div className="location__typeimage" locationtype={location.type}></div>
-                    {/*<img src={'/images/' + location.type.toLowerCase() + '.png'} className={classes.location__typeimage}*/}
-                    {/*     alt={location.type}/>*/}
-                    <h2 className={classes.location__name}>{location.name}</h2>
+                    <div className="location__image" locationtype={location.type}></div>
+                    <h2 className={classes.location__name} title={location.name}>{location.name}</h2>
                     <h3 className={classes.location__type}>{location.type}</h3>
                     <ul className={classes.location__residents}>
                       {(location['residents'][0]) ?
