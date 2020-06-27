@@ -10,7 +10,6 @@ export default class LocationProfile extends Component {
     characters: this.props.location ? this.props.location.residents.slice(0, 20) : null
   };
   handleScroll = () => {
-    // console.log(window.pageYOffset + window.innerHeight + ' ' + window.document.body.offsetHeight);
     if ((window.pageYOffset + window.innerHeight) >= window.document.body.offsetHeight) {
       let newLength = this.state.characters.length;
       if (newLength < this.props.location.residents.length) {
@@ -83,28 +82,9 @@ export default class LocationProfile extends Component {
     )
   }
 }
-// export async function getServerSidePaths() {
-//     const { locations } = await queryGraphql(`
-//     query {
-//       locations {
-//         results {
-//             name
-//             id
-//         }
-//       }
-//     }
-//   `)
-//     return {
-//         paths: locations.results.map(( location ) => ({
-//             params: { id : location.id.toString() },
-//         })),
-//         fallback: true,
-//     }
-// }
 export async function getServerSideProps(context) {
   const {params} = context
   const locationid = params.id;
-  // const  locationid  = 1;
   let queryString = `
     query  {
     location (id: $locationid) {

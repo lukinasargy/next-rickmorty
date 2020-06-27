@@ -46,7 +46,6 @@ export default function CharacterProfile({ character }) {
 export async function getServerSideProps(context) {
   const {params} = context;
   const characterId = params.id;
-  // const  locationid  = 1;
   let queryString = `
     query  {
       character (id: $characterId) {

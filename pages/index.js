@@ -9,7 +9,6 @@ export default class LocationListing extends Component {
     locations: this.props.locations.results.slice(0, 20)
   };
   handleScroll = () => {
-    // console.log(window.pageYOffset + window.innerHeight + ' ' + window.document.body.offsetHeight);
     if ((window.pageYOffset + window.innerHeight) >= window.document.body.offsetHeight) {
       let newLength = this.state.locations.length;
       if (newLength < this.props.locations.results.length) {
@@ -33,7 +32,6 @@ export default class LocationListing extends Component {
     return (
       <Layout>
         <div className="container">
-          {/*<h1 onClick={this.handleScroll}>Location Listing</h1>*/}
           <ul className={classes.location__list}>
             {this.state.locations.map((location) => (
               <li key={location.name} className={classes.location__item}>
@@ -90,19 +88,5 @@ export async function getServerSideProps() {
     let added = {locationsAdded};
     locations.results = [...locations.results, ...added.locationsAdded.locations.results]
   }
-  // const {locations} = await queryGraphql(`query {
-  //   locations(page: $page) {
-  //     results {
-  //         id
-  //         name
-  //         type
-  //         residents{
-  //             name
-  //             image
-  //          }
-  //      }
-  //   }
-  // }`.replace('$page', '1'));
-  // console.log(locations);
   return {props: {locations}}
 }

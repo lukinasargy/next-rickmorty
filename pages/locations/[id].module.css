@@ -36,14 +36,6 @@
     grid-area: character__image;
     align-self: center;
 }
-.character__name {
-    /*white-space: nowrap;*/
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis;*/
-    /*padding-right: 16px;*/
-    /*width: calc(100vw - 145px);*/
-    /*width: 230px;*/
-}
 @media (min-width: 414px) {
     .character__name {
         font-size: 24px;
