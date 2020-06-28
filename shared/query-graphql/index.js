@@ -1,7 +1,5 @@
 import { graphql } from 'graphql'
 
-// import { schema } from '../../pages/api/graphql'
-import { schema } from '../../pages/api/rm-graphql'
 const url = "https://rickandmortyapi.com/graphql/";
 
 export default async function queryGraphql(query, variableValues = {}) {
