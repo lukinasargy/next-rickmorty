@@ -48,4 +48,12 @@
 
         gap: 16px;
     }
+    .character {
+        transition: 0.25s ease;
+    }
+    .character:hover {
+        transform: translate(-5px,-5px);
+        perspective: 1000px;
+        box-shadow: 5px 5px 5px rgba(66,255,235,0.3);
+    }
 }

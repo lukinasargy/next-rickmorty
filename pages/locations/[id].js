@@ -60,7 +60,7 @@ export default class LocationProfile extends Component {
               <h2 className={classes.residents__title}>Residents</h2>
               <ul className={classes.residents__list}>
                 {this.state.characters.map((character) => (
-                  <li key={character.id} className={classes.character__item}>
+                  <li key={character.id} className={classes.character}>
                     <Link href="/characters/[id]" as={`/characters/${character.id.toString()}`}>
                       <a className={classes.character__link}>
                         <img src={character.image} className={classes.character__image}/>

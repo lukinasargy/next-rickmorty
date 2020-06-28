@@ -66,13 +66,25 @@
     .location__list {
         grid-template-columns: 1fr 1fr;
         gap: 16px;
-        /*grid-template-rows: repeat(10, 1fr) ;*/
         align-items: center;
+    }
+    .location__item {
+        transition: 0.25s ease;
+    }
+    .location__item:hover {
+        transform: translate(-5px,-5px);
+        perspective: 1000px;
+        box-shadow: 5px 5px 5px rgba(66,255,235,0.3);
     }
     .location__name {
         white-space: unset;
         overflow: unset;
         text-overflow: unset;
-        padding-right: 0;
+        padding-right: 0px;
+        margin-top: 16px;
+        margin-bottom: 12px;
+    }
+    .location__link {
+        grid-template-rows: auto auto 1fr;
     }
 }
